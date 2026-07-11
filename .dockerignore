@@ -1,0 +1,14 @@
+# Ignore files not needed in Docker build
+target/
+*.md
+.git/
+.gitignore
+.idea/
+*.iml
+.DS_Store
+*.log
+.env
+*.txt
+HELP.md
+README.md
+POSTMAN_*.json
