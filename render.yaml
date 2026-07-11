@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: risk-engine
+    runtime: docker
+    plan: free
+    branch: main
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://ep-fancy-boat-atwyn5yp-pooler.c-9.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+      - key: SPRING_DATASOURCE_USERNAME
+        value: neondb_owner
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: npg_C02LRFcUdHQW
+      - key: HIBERNATE_DDL_AUTO
+        value: update
+      - key: PORT
+        value: 8080
