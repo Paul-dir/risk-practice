@@ -1,3 +1,12 @@
+# Alternative: Use Render's PostgreSQL instead of Neon
+# To use this: rename to render.yaml and push
+
+databases:
+  - name: risk-engine-db
+    plan: free
+    databaseName: risk_engine
+    user: risk_engine
+
 services:
   - type: web
     name: risk-engine
@@ -9,11 +18,17 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://ep-fancy-boat-atwyn5yp-pooler.c-9.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+        fromDatabase:
+          name: risk-engine-db
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        value: neondb_owner
+        fromDatabase:
+          name: risk-engine-db
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        value: npg_C02LRFcUdHQW
+        fromDatabase:
+          name: risk-engine-db
+          property: password
       - key: HIBERNATE_DDL_AUTO
         value: update
       - key: PORT
