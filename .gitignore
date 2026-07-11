@@ -1,0 +1,77 @@
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Logs ###
+logs/
+*.log
+
+### Internal Documentation (Not for Public GitHub) ###
+HELP.md
+START_HERE.md
+QUICK_START.md
+QUICKSTART.md
+README_RUNNING.md
+RUN_FROM_INTELLIJ.md
+FIXED_AND_READY.md
+READY_TO_RUN.md
+SUMMARY.md
+DATABASE_ISSUE_RESOLUTION.md
+DATABASE_AND_KAFKA_CONFIGURATION.md
+DOCKER_SETUP_GUIDE.md
+INTEGRATION_SUMMARY.md
+INTEGRATION_SEQUENCE_DIAGRAM.md
+PRODUCTION_INTEGRATION_GUIDE.md
+SYSTEM_READINESS_REPORT.md
+SYSTEM_STATUS_AND_NEXT_STEPS.md
+SYSTEM_INTEGRATION_ARCHITECTURE.md
+IMPLEMENTATION_ROADMAP.md
+RESTRUCTURING_SUMMARY.md
+POSTMAN_TESTING_GUIDE.md
+INTELLIJ_PROFILE_SETUP.md
+END_TO_END_VERIFICATION.md
+FIX_AND_RUN.md
+NEXT_STEPS.md
+
+### Internal Scripts ###
+setup-database.sh
+load-sample-data.sql
+reset-database.sh
+restart-postgres.sh
+compile.log
+
+### Keep These (Architecture & Project Docs) ###
+!ARCHITECTURE_PRINCIPLES.md
+!ARCHITECTURE_DECISION_SUMMARY.md
+!CENTRAL_DATABASE_IMPLEMENTATION.md
+!CENTRALIZED_VS_DISTRIBUTED_ARCHITECTURE.md
+!PROJECT_STRUCTURE.md

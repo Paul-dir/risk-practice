@@ -1,0 +1,146 @@
+{
+  "info": {
+    "name": "Risk Engine API",
+    "description": "Tax Risk Assessment Engine - API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "assessmentId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/actuator/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["actuator", "health"]
+        },
+        "description": "Check if the Risk Engine is running"
+      }
+    },
+    {
+      "name": "Assess Risk - Standard Case",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "    var jsonData = pm.response.json();",
+              "    pm.collectionVariables.set('assessmentId', jsonData.assessmentId);",
+              "    pm.test('Assessment ID captured', function() {",
+              "        pm.expect(jsonData.assessmentId).to.not.be.undefined;",
+              "    });",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"tin\": \"TIN123456789\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/assess",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "assess"]
+        },
+        "description": "Assess risk for a taxpayer"
+      }
+    },
+    {
+      "name": "Assess Risk - High Risk Case",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"660e8400-e29b-41d4-a716-446655440001\",\n  \"tin\": \"TIN987654321\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/assess",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "assess"]
+        },
+        "description": "Assess risk for a high-risk taxpayer"
+      }
+    },
+    {
+      "name": "Get Risk Explanation",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/explain/{{assessmentId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "explain", "{{assessmentId}}"]
+        },
+        "description": "Get full risk explanation for an assessment"
+      }
+    },
+    {
+      "name": "Get Risk Summary (Taxpayer Portal)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/explain/{{assessmentId}}/summary",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "explain", "{{assessmentId}}", "summary"]
+        },
+        "description": "Get brief summary for taxpayer portal"
+      }
+    },
+    {
+      "name": "Get Detailed Explanation (Auditors)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/explain/{{assessmentId}}/detailed",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "explain", "{{assessmentId}}", "detailed"]
+        },
+        "description": "Get detailed explanation for auditors"
+      }
+    },
+    {
+      "name": "Swagger UI",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/swagger-ui.html",
+          "host": ["{{baseUrl}}"],
+          "path": ["swagger-ui.html"]
+        },
+        "description": "Open Swagger API documentation in browser"
+      }
+    }
+  ]
+}
