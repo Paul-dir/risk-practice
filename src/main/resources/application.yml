@@ -2,11 +2,11 @@ spring:
   application:
     name: tax-risk-engine
   
-  # Database Configuration
+  # Database Configuration (uses environment variables for cloud deployment)
   datasource:
-    url: jdbc:postgresql://localhost:5432/risk_engine_db
-    username: risk_engine
-    password:  # Updated fallback to your real password
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/risk_engine_db}
+    username: ${SPRING_DATASOURCE_USERNAME:risk_engine}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
@@ -18,7 +18,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate  # Validates tables against your Flyway scripts
+      ddl-auto: ${HIBERNATE_DDL_AUTO:validate}  # validate for prod, can override with env var
     show-sql: false
     properties:
       hibernate:
@@ -35,11 +35,11 @@ spring:
     locations: classpath:db/migration
     schemas: public
 
-  # Redis Cache Configuration
+  # Redis Cache Configuration (optional for cloud deployment)
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
       timeout: 2000ms
       jedis:
@@ -48,9 +48,9 @@ spring:
           max-idle: 10
           min-idle: 5
 
-  # Kafka Configuration
+  # Kafka Configuration (optional for cloud deployment)
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
