@@ -1,0 +1,47 @@
+spring:
+  # Database Configuration - MUST use environment variables
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  # JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:update}
+    show-sql: false
+
+  # Flyway Migration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    schemas: public
+
+  # Disable Redis for production (not available on free tier)
+  cache:
+    type: simple  # Use in-memory cache instead of Redis
+
+  # Disable Kafka auto-configuration
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+
+# Risk Engine Configuration
+risk-engine:
+  events:
+    kafka-enabled: false  # Disable Kafka events in production
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.practice.risk: INFO
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
