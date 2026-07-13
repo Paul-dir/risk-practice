@@ -17,10 +17,18 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: SPRING_DATASOURCE_URL
+      - key: DATABASE_HOST
         fromDatabase:
           name: risk-engine-db
-          property: connectionString
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: risk-engine-db
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: risk-engine-db
+          property: database
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: risk-engine-db
