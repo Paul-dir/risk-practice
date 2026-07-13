@@ -37,7 +37,5 @@ services:
         fromDatabase:
           name: risk-engine-db
           property: password
-      - key: HIBERNATE_DDL_AUTO
-        value: update
       - key: PORT
         value: 8080
