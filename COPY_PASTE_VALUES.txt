@@ -1,0 +1,91 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║            KOYEB DEPLOYMENT - COPY & PASTE VALUES                    ║
+║                  (Keep this window open)                             ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📍 WEBSITE: https://app.koyeb.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BUILD SETTINGS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Build command (copy this):
+./mvnw clean package -DskipTests
+
+Run command (copy this):
+java -jar target/risk-engine-1.0.0-SNAPSHOT.jar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENVIRONMENT VARIABLES (Add 6 variables - click "Add variable" for each):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 1:
+━━━━━━━
+Name:  SPRING_DATASOURCE_URL
+Value: jdbc:postgresql://ep-fancy-boat-atwyn5yp-pooler.c-9.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+
+Variable 2:
+━━━━━━━
+Name:  SPRING_DATASOURCE_USERNAME
+Value: neondb_owner
+
+Variable 3:
+━━━━━━━
+Name:  SPRING_DATASOURCE_PASSWORD
+Value: npg_C02LRFcUdHQW
+
+Variable 4:
+━━━━━━━
+Name:  SPRING_PROFILES_ACTIVE
+Value: prod
+
+Variable 5:
+━━━━━━━
+Name:  HIBERNATE_DDL_AUTO
+Value: update
+
+Variable 6:
+━━━━━━━
+Name:  PORT
+Value: 8080
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SERVICE SETTINGS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+App name: risk-engine
+Instance type: Eco (free tier)
+Region: Washington, D.C. (us-east)
+Instances: 1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PORTS & HEALTH CHECK:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Port: 8080
+Protocol: HTTP
+Health check path: /actuator/health
+Grace period: 30 seconds
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TESTING (After deployment - replace YOUR-URL with actual URL):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Test health:
+curl https://YOUR-URL.koyeb.app/actuator/health
+
+Test risk assessment:
+curl -X POST https://YOUR-URL.koyeb.app/api/v1/risk/assess \
+  -H "Content-Type: application/json" \
+  -d '{"taxpayerId":"550e8400-e29b-41d4-a716-446655440000","tin":"TEST123"}'
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ DONE! Your API will be live at: https://risk-engine-YOUR-NAME.koyeb.app
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

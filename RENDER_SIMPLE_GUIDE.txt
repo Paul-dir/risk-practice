@@ -1,0 +1,116 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║         RENDER.COM - SIMPLE COPY & PASTE GUIDE                       ║
+║     You're at: https://dashboard.render.com/web/new                  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1: Connect Repository
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You'll see "Public Git Repository" section.
+
+📋 COPY AND PASTE THIS into "Repository URL":
+https://github.com/Paul-dir/risk-practice
+
+Then click the blue "Connect" button.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2: Fill Form (After clicking Connect)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHERE TO PASTE                    WHAT TO PASTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name:                             risk-engine
+
+Region:                           [Select] Oregon (US West)
+
+Branch:                           main
+
+Root Directory:                   [Leave EMPTY]
+
+Runtime:                          [Select dropdown] Java
+
+Build Command:                    ./mvnw clean package -DskipTests
+
+Start Command:                    java -jar target/risk-engine-1.0.0-SNAPSHOT.jar
+
+Instance Type:                    [Select] Free
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3: Environment Variables (IMPORTANT!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Scroll down to "Environment Variables" section.
+Click "Add Environment Variable" 6 times (for each variable below).
+
+▼ Variable 1 ▼
+Key:   SPRING_DATASOURCE_URL
+Value: jdbc:postgresql://ep-fancy-boat-atwyn5yp-pooler.c-9.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+
+▼ Variable 2 ▼
+Key:   SPRING_DATASOURCE_USERNAME
+Value: neondb_owner
+
+▼ Variable 3 ▼
+Key:   SPRING_DATASOURCE_PASSWORD
+Value: npg_C02LRFcUdHQW
+
+▼ Variable 4 ▼
+Key:   SPRING_PROFILES_ACTIVE
+Value: prod
+
+▼ Variable 5 ▼
+Key:   HIBERNATE_DDL_AUTO
+Value: update
+
+▼ Variable 6 ▼
+Key:   PORT
+Value: 8080
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 4: Advanced Settings (Optional - Click "Advanced" to expand)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Auto-Deploy:                      [Keep checked ✅]
+
+Health Check Path:                /actuator/health
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 5: Create Service
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Scroll to bottom and click:
+[Create Web Service] (big blue button)
+
+Wait 5-10 minutes for deployment.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 6: Test After Deployment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After "Live" appears, copy your URL (looks like):
+https://risk-engine.onrender.com
+
+Test in terminal (replace YOUR-URL):
+curl https://YOUR-URL/actuator/health
+
+Expected: {"status":"UP"}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CHECKLIST (Before clicking "Create Web Service"):
+
+[ ] Repository: https://github.com/Paul-dir/risk-practice
+[ ] Name: risk-engine
+[ ] Branch: main
+[ ] Runtime: Java
+[ ] Build Command: ./mvnw clean package -DskipTests
+[ ] Start Command: java -jar target/risk-engine-1.0.0-SNAPSHOT.jar
+[ ] Instance Type: Free
+[ ] 6 environment variables added
+[ ] Health Check Path: /actuator/health
+
+If all checked → Click "Create Web Service" → Done! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,124 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║         RENDER.COM - DOCKER DEPLOYMENT (COPY & PASTE)                ║
+║     You're at: https://dashboard.render.com/web/new                  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1: Connect Repository
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 COPY AND PASTE THIS into "Repository URL":
+https://github.com/Paul-dir/risk-practice
+
+Then click the blue "Connect" button.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2: Fill Form (After clicking Connect)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHERE TO PASTE                    WHAT TO PASTE/SELECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name:                             risk-engine
+
+Region:                           [Select] Oregon (US West)
+
+Branch:                           main
+
+Root Directory:                   [Leave EMPTY]
+
+Runtime:                          Docker
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️  IMPORTANT: For Docker, you DON'T need Build/Start commands!
+    Render will use your Dockerfile automatically.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Instance Type:                    [Select] Free
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3: Environment Variables (IMPORTANT!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Scroll down to "Environment Variables" section.
+Click "Add Environment Variable" 6 times.
+
+▼ Variable 1 ▼
+Key:   SPRING_DATASOURCE_URL
+Value: jdbc:postgresql://ep-fancy-boat-atwyn5yp-pooler.c-9.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+
+▼ Variable 2 ▼
+Key:   SPRING_DATASOURCE_USERNAME
+Value: 
+▼ Variable 3 ▼
+Key:   SPRING_DATASOURCE_PASSWORD
+Value: npg_C02LRFcUdHQW
+
+▼ Variable 4 ▼
+Key:   SPRING_PROFILES_ACTIVE
+Value: prod
+
+▼ Variable 5 ▼
+Key:   HIBERNATE_DDL_AUTO
+Value: update
+
+▼ Variable 6 ▼
+Key:   PORT
+Value: 8080
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 4: Advanced Settings (Click "Advanced" to expand)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Auto-Deploy:                      [Keep checked ✅]
+
+Health Check Path:                /actuator/health
+
+Docker Command:                   [Leave EMPTY - uses Dockerfile ENTRYPOINT]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 5: Push Dockerfile to GitHub FIRST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  WAIT! Before clicking "Create Web Service", we need to push 
+    the Dockerfile to GitHub first!
+
+I'll do this for you now...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 6: After Dockerfile is pushed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Scroll to bottom and click:
+[Create Web Service] (big blue button)
+
+Wait 5-10 minutes for Docker build and deployment.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 7: Test After Deployment
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After "Live" appears, copy your URL:
+https://risk-engine.onrender.com
+
+Test:
+curl https://YOUR-URL/actuator/health
+
+Expected: {"status":"UP"}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CHECKLIST (Before clicking "Create Web Service"):
+
+[ ] Repository: https://github.com/Paul-dir/risk-practice
+[ ] Name: risk-engine
+[ ] Branch: main
+[ ] Runtime: Docker
+[ ] Instance Type: Free
+[ ] 6 environment variables added
+[ ] Health Check Path: /actuator/health
+[ ] Dockerfile pushed to GitHub ✅
+
+If all checked → Click "Create Web Service" → Done! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

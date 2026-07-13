@@ -1,0 +1,76 @@
+╔══════════════════════════════════════════════════════════════════╗
+║         🚀 DEPLOY YOUR RISK ENGINE FOR FREE - QUICK START       ║
+╚══════════════════════════════════════════════════════════════════╝
+
+✅ PUSHED TO GITHUB: https://github.com/Paul-dir/risk-practice
+
+📋 OPTION 1: Railway.app (⭐ RECOMMENDED - 15 MINUTES)
+────────────────────────────────────────────────────────────────────
+
+1. Go to: https://railway.app
+2. Sign in with GitHub
+3. New Project → Deploy from GitHub → Select "risk-practice"
+4. Add Database: + New → PostgreSQL
+5. Configure Variables:
+   - SPRING_PROFILES_ACTIVE = prod
+   - SPRING_DATASOURCE_URL = <from Railway PostgreSQL>
+   - SPRING_DATASOURCE_USERNAME = <from Railway>
+   - SPRING_DATASOURCE_PASSWORD = <from Railway>
+   - PORT = 8080
+6. Generate Domain → Get your URL
+7. Test: curl https://your-app.up.railway.app/actuator/health
+
+✅ DONE! Your Risk Engine is live and accessible!
+
+────────────────────────────────────────────────────────────────────
+
+📋 OPTION 2: Render.com (20 MINUTES)
+────────────────────────────────────────────────────────────────────
+
+1. Go to: https://render.com
+2. Sign in with GitHub
+3. New Web Service → Connect risk-practice repo
+4. Build: ./mvnw clean package -DskipTests
+5. Start: java -jar target/risk-engine-1.0.0-SNAPSHOT.jar
+6. Add PostgreSQL database
+7. Configure environment variables
+8. Deploy and get URL
+
+────────────────────────────────────────────────────────────────────
+
+📋 COMPARISON:
+────────────────────────────────────────────────────────────────────
+
+Railway:   ⭐⭐⭐⭐⭐  Fastest, easiest, perfect for testing
+Render:    ⭐⭐⭐⭐   Good alternative, more hours/month
+Fly.io:    ⭐⭐⭐    More control, requires CLI
+Oracle:    ⭐⭐     Free forever, but complex setup
+
+────────────────────────────────────────────────────────────────────
+
+📖 FULL GUIDE: Read FREE_DEPLOYMENT_GUIDE.md for detailed steps
+
+🎯 AFTER DEPLOYMENT:
+────────────────────────────────────────────────────────────────────
+
+1. Test your URL:
+   curl https://your-app-url/actuator/health
+
+2. Test risk assessment:
+   curl -X POST https://your-app-url/api/v1/risk/assess \
+     -H "Content-Type: application/json" \
+     -d '{"taxpayerId":"550e8400-e29b-41d4-a716-446655440000","tin":"TEST"}'
+
+3. Configure Tax Audit:
+   risk.engine.url=https://your-app-url
+
+4. Integrate and test!
+
+────────────────────────────────────────────────────────────────────
+
+💡 NEED HELP?
+- Railway Docs: https://docs.railway.app
+- Render Docs: https://render.com/docs
+- Or ask me for help!
+
+Ready? Start with Railway.app - it's the easiest! 🚀
