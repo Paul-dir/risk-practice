@@ -62,9 +62,9 @@ public class BatchScoringScheduler {
     /**
      * Scheduled batch assessment job
      * Runs according to cron expression in application.yml
-     * Default: 2 AM daily (0 2 * * *)
+     * Default: 2 AM daily (0 0 2 * * *)
      */
-    @Scheduled(cron = "${risk-engine.batch.schedule:0 2 * * *}")
+    @Scheduled(cron = "${risk-engine.batch.schedule:0 0 2 * * *}")
     @Async
     public void runBatchAssessment() {
         if (isRunning) {
