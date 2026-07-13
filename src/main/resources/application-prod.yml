@@ -15,7 +15,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate  # Use 'validate' because Flyway handles schema
+      ddl-auto: none  # Flyway handles all schema management
     show-sql: false
 
   # Flyway Migration
