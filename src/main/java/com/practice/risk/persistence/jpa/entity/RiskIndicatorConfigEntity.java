@@ -47,11 +47,16 @@ public class RiskIndicatorConfigEntity {
     @Column(nullable = false)
     private Boolean isActive;
 
-    @Column(length = 50)
-    private String dataSource;
-
     @Column(nullable = false)
-    private Integer configVersion;
+    private Integer version;  // Fixed: matches database column name
+
+    private String description;  // Added: exists in database
+
+    @Column(length = 100)
+    private String createdBy;  // Added: exists in database
+
+    @Column(length = 100)
+    private String updatedBy;  // Added: exists in database
 
     @CreationTimestamp
     private Instant createdAt;
