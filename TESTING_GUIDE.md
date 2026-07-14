@@ -1,365 +1,350 @@
-# ✅ Tax Risk Engine - Testing Guide
+# 🚀 Risk Engine API - Testing Guide
 
-## System Status
+## Your Live API
 
-**✅ Application is RUNNING and WORKING!**
+**Base URL:** `https://risk-engine-720i.onrender.com`
 
-- **Health Status**: UP
-- **Database**: Connected (PostgreSQL)
-- **Port**: 8080
-- **Profile**: dev
-- **Mock Data**: Active (returns test data)
-
-## Quick Test Results
-
-I've already tested the system - here's what works:
-
-```bash
-✅ Health Check: http://localhost:8080/actuator/health
-   Response: {"status":"UP"}
-
-✅ Risk Assessment: POST http://localhost:8080/api/v1/risk/assess
-   Input: {"taxpayerId":"550e8400-e29b-41d4-a716-446655440000","tin":"TEST123456789"}
-   Response: Complete risk assessment with scores and indicators
-```
-
-## Testing Methods
-
-You can test in two ways:
-1. **Command Line (curl)** - Quick tests
-2. **Postman** - Full testing with collection
+**Status:** ✅ LIVE and RUNNING!
 
 ---
 
-## Method 1: Command Line Testing (curl)
+## Quick Test (Using curl)
 
-### Test 1: Health Check
+### 1. Health Check
 ```bash
-curl http://localhost:8080/actuator/health
+curl https://risk-engine-720i.onrender.com/actuator/health
 ```
 
 **Expected Response:**
 ```json
-{"status":"UP","components":{"db":{"status":"UP"},"ping":{"status":"UP"}}}
+{"status":"UP","groups":["liveness","readiness"]}
 ```
 
-### Test 2: Risk Assessment
+### 2. Create Risk Assessment (Wait for redeploy first!)
 ```bash
-curl -X POST http://localhost:8080/api/v1/risk/assess \
+curl -X POST https://risk-engine-720i.onrender.com/api/v1/risk/assess \
   -H "Content-Type: application/json" \
   -d '{
-    "taxpayerId": "550e8400-e29b-41d4-a716-446655440000",
-    "tin": "TEST123456789"
-  }'
-```
-
-**Expected Response:**
-```json
-{
-  "assessmentId": "uuid-here",
-  "taxpayerId": "550e8400-e29b-41d4-a716-446655440000",
-  "tin": "TEST123456789",
-  "overallScore": 0.00,
-  "riskLevel": "LOW",
-  "confidenceFactor": 1.00,
-  "priorityRank": 0,
-  "categoryScores": [
-    {
-      "category": "FILING",
-      "score": 0.10,
-      "weight": 0.25,
-      "contribution": 0.00
-    },
-    ...
-  ],
-  "indicatorScores": [
-    {
-      "indicatorCode": "LATE_FILING",
-      "indicatorName": "Late Filing",
-      "score": 15.00,
-      "actualValue": "45 days",
-      "explanation": "Filing was 45 days late."
-    },
-    ...
-  ],
-  "assessmentDate": "2026-07-11T..."
-}
-```
-
-### Test 3: Different Taxpayers
-```bash
-# Test taxpayer 2
-curl -X POST http://localhost:8080/api/v1/risk/assess \
-  -H "Content-Type: application/json" \
-  -d '{
-    "taxpayerId": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    "taxpayerId": "123e4567-e89b-12d3-a456-426614174000",
     "tin": "1234567890"
   }'
+```
 
-# Test taxpayer 3
-curl -X POST http://localhost:8080/api/v1/risk/assess \
+### 3. View Metrics
+```bash
+curl https://risk-engine-720i.onrender.com/actuator/metrics
+```
+
+---
+
+## Test with Postman
+
+### Import the Collection
+
+1. **Open Postman**
+2. Click **"Import"** button (top left)
+3. Select **"File"** tab
+4. Choose: `RENDER_POSTMAN_COLLECTION.json`
+5. Click **"Import"**
+
+### Collection Structure
+
+The collection includes:
+
+📁 **Health & Monitoring**
+- Health Check
+- Detailed Health
+- All Metrics
+- Risk Assessments Completed
+- Prometheus Metrics
+
+📁 **Risk Assessment**
+- Assess Taxpayer Risk ⭐ (Main endpoint)
+- Get Risk Assessment by ID
+- Get Latest Assessment for Taxpayer
+- Get Assessment History
+- Search Assessments by Risk Level
+
+📁 **Risk Profile**
+- Get Taxpayer Risk Profile
+- Update Risk Profile
+
+📁 **Configuration**
+- Get All Risk Indicators
+- Get Active Indicators
+- Get Indicator by Code
+
+📁 **Statistics & Analytics**
+- Get Risk Statistics
+- Risk Distribution by Level
+- Top High-Risk Taxpayers
+
+### Test Now (Available Immediately)
+
+✅ **These endpoints work RIGHT NOW:**
+- All Health & Monitoring endpoints
+- All Metrics endpoints
+
+⏳ **These will work after redeploy (2-3 minutes):**
+- Risk Assessment endpoints
+- Risk Profile endpoints
+- Configuration endpoints
+- Statistics endpoints
+
+---
+
+## Test with Other Tools
+
+### Using Bruno (Open Source Postman Alternative)
+
+1. Install Bruno: https://www.usebruno.com/
+2. Import the same JSON file
+3. Test all endpoints
+
+### Using Insomnia
+
+1. Install Insomnia: https://insomnia.rest/
+2. Import the collection
+3. Test endpoints
+
+### Using VS Code REST Client
+
+1. Install "REST Client" extension
+2. Create a `.http` file:
+
+```http
+### Health Check
+GET https://risk-engine-720i.onrender.com/actuator/health
+
+### Create Risk Assessment
+POST https://risk-engine-720i.onrender.com/api/v1/risk/assess
+Content-Type: application/json
+
+{
+  "taxpayerId": "123e4567-e89b-12d3-a456-426614174000",
+  "tin": "1234567890"
+}
+
+### Get Metrics
+GET https://risk-engine-720i.onrender.com/actuator/metrics
+```
+
+3. Click "Send Request" above each request
+
+### Using HTTPie (Command Line)
+
+```bash
+# Health check
+http https://risk-engine-720i.onrender.com/actuator/health
+
+# Create assessment
+http POST https://risk-engine-720i.onrender.com/api/v1/risk/assess \
+  taxpayerId="123e4567-e89b-12d3-a456-426614174000" \
+  tin="1234567890"
+```
+
+---
+
+## Test Scenarios
+
+### Scenario 1: Basic Health Check
+**Goal:** Verify the service is running
+
+```bash
+curl https://risk-engine-720i.onrender.com/actuator/health
+```
+
+**Expected:** `{"status":"UP"}`
+
+---
+
+### Scenario 2: Create First Risk Assessment
+**Goal:** Assess a taxpayer's risk
+
+**Step 1:** Wait for redeploy to complete (check Render dashboard)
+
+**Step 2:** Send request
+```bash
+curl -X POST https://risk-engine-720i.onrender.com/api/v1/risk/assess \
   -H "Content-Type: application/json" \
   -d '{
-    "taxpayerId": "b1ffcd00-0d1c-5fg9-cc7e-7cc0ce491b22",
-    "tin": "2345678901"
+    "taxpayerId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+    "tin": "1234567890"
   }'
 ```
 
----
-
-## Method 2: Postman Testing
-
-### Step 1: Import Collection
-
-1. Open Postman
-2. Click **Import** button (top left)
-3. Select **File** → Browse to: `/home/paul/Desktop/risk-practice/POSTMAN_COLLECTION_UPDATED.json`
-4. Click **Import**
-
-You'll see a collection called: **"Tax Risk Assessment Engine - Complete API"**
-
-### Step 2: Test Health Check
-
-1. Expand collection → **Health & Monitoring** → **Health Check**
-2. Click **Send**
-3. Verify response shows `"status":"UP"`
-
-### Step 3: Test Risk Assessment
-
-1. Expand **Risk Assessment** → **Assess Risk - Simple Test**
-2. Click **Send**
-3. Verify response contains:
-   - ✅ `assessmentId` (UUID)
-   - ✅ `overallScore` (number)
-   - ✅ `riskLevel` (LOW/MEDIUM/HIGH/CRITICAL)
-   - ✅ `categoryScores` (array of 6 categories)
-   - ✅ `indicatorScores` (array of 11 indicators)
-
-### Step 4: Copy Assessment ID
-
-From the response, copy the `assessmentId` value (UUID).
-
-Example: `"assessmentId": "1efdfc64-2dd7-4a64-b9bb-4b4869d93746"`
-
-### Step 5: Get Risk Explanation
-
-1. Expand **Risk Explanation** → **Get Risk Explanation**
-2. In the URL, replace `{{assessmentId}}` with the UUID you copied
-3. Click **Send**
-4. Verify you get detailed explanation of the assessment
-
----
-
-## Understanding the Response
-
-### Risk Assessment Response Structure
-
+**Expected Response:**
 ```json
 {
-  "assessmentId": "uuid",           // Unique ID for this assessment
-  "taxpayerId": "uuid",              // Taxpayer being assessed
-  "tin": "string",                   // Tax Identification Number
-  "overallScore": 0.00,              // Overall risk score (0-100)
-  "riskLevel": "LOW",                // LOW, MEDIUM, HIGH, or CRITICAL
-  "confidenceFactor": 1.00,          // Confidence in assessment (0-1)
-  "priorityRank": 0,                 // Priority ranking (lower = higher priority)
-  "categoryScores": [...],           // 6 category breakdowns
-  "indicatorScores": [...],          // 11 detailed indicators
-  "assessmentDate": "2026-07-11..."  // When assessment was performed
+  "assessmentId": "uuid",
+  "taxpayerId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+  "tin": "1234567890",
+  "overallScore": 65.5,
+  "riskLevel": "MEDIUM",
+  "confidenceLevel": 0.85,
+  "assessmentDate": "2026-07-14T...",
+  "indicators": [...],
+  "recommendations": [...]
 }
 ```
 
-### Category Scores (6 Categories)
+---
 
-1. **FILING** (25% weight) - Filing compliance
-2. **PAYMENT** (25% weight) - Payment compliance
-3. **FINANCIAL** (20% weight) - Financial health
-4. **TRANSACTION** (15% weight) - Transaction patterns
-5. **BEHAVIORAL** (10% weight) - Behavioral indicators
-6. **INDUSTRY** (5% weight) - Industry benchmarks
+### Scenario 3: Get Taxpayer's Latest Assessment
+**Goal:** Retrieve the most recent risk assessment
 
-### Indicator Scores (11 Indicators)
-
-#### Filing (3 indicators):
-- **LATE_FILING** - Late submission of returns
-- **MULTIPLE_AMENDMENTS** - Frequent amendments
-- **NON_FILING** - Missing required filings
-
-#### Payment (2 indicators):
-- **LATE_PAYMENT** - Late payment of taxes
-- **PARTIAL_PAYMENT** - Partial payment of liabilities
-
-#### Financial (2 indicators):
-- **CONTINUOUS_LOSSES** - Consecutive years of losses
-- **RAPID_REVENUE_DECLINE** - Significant revenue decrease
-
-#### Transaction (2 indicators):
-- **IMPORT_SALES_MISMATCH** - Import vs sales inconsistency
-- **RELATED_PARTY_TRANSACTIONS** - High related-party dealings
-
-#### Behavioral (1 indicator):
-- **SHORT_BUSINESS_LIFE** - Recently established business
-
-#### Industry (1 indicator):
-- **SECTOR_SPECIFIC_RISK** - High-risk industry classification
+```bash
+curl https://risk-engine-720i.onrender.com/api/v1/risk/taxpayers/a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d/latest
+```
 
 ---
 
-## Current System Behavior
+### Scenario 4: View Risk Statistics
+**Goal:** Get overview of all assessments
 
-### ⚠️ Using Mock Data Adapters
-
-The system currently uses **mock adapters** that return test data. This means:
-
-✅ **Pros:**
-- System works immediately without real data
-- Can test all functionality
-- All endpoints return realistic responses
-
-⚠️ **Limitations:**
-- All taxpayers return similar mock data
-- Scores don't reflect real taxpayer behavior
-- No actual database query for taxpayer data
-
-### Mock Data Pattern
-
-The mock adapters return:
-- **Registration Data**: Generic business info
-- **Filing Data**: 45 days late, 2 amendments
-- **Payment Data**: 30 days late, 75% paid
-- **Financial Data**: No losses, stable revenue
-- **Transaction Data**: 50% import/sales ratio
-- **Behavioral Data**: 3 years old business
+```bash
+curl https://risk-engine-720i.onrender.com/api/v1/risk/statistics
+```
 
 ---
 
-## Deployment & Integration
+## Expected Response Times
 
-### Q: Is the system deployed and ready for Tax Audit integration?
+| Endpoint Type | Expected Time |
+|--------------|---------------|
+| Health Check | < 100ms |
+| Metrics | < 200ms |
+| Risk Assessment (new) | 2-5 seconds |
+| Get Assessment (cached) | < 200ms |
+| Statistics | < 500ms |
 
-**A: NO - The system is currently running LOCALLY on your machine.**
+---
 
-Here's what's happening:
+## Troubleshooting
 
-### Current State: LOCAL DEVELOPMENT
+### Issue: "Connection refused"
+**Solution:** The service might be sleeping (free tier). Wait 30 seconds and retry.
 
+### Issue: "500 Internal Server Error"
+**Solution:** Redeploy is still in progress. Wait 2-3 minutes.
+
+### Issue: "404 Not Found"
+**Solution:** Check the URL spelling and endpoint path.
+
+### Issue: Slow first request
+**Solution:** Free tier services sleep after inactivity. First request wakes them up (takes ~30 seconds).
+
+---
+
+## Monitoring Your API
+
+### View Logs in Real-Time
+1. Go to Render Dashboard
+2. Click on your service: `risk-engine`
+3. Click "Logs" tab
+4. See real-time logs as you test
+
+### Check Metrics
+```bash
+# See all available metrics
+curl https://risk-engine-720i.onrender.com/actuator/metrics
+
+# Check specific metric
+curl https://risk-engine-720i.onrender.com/actuator/metrics/risk.assessment.completed
 ```
-Your Machine (localhost:8080)
-├── Risk Engine Application ✅ Running
-├── PostgreSQL Database ✅ Connected
-├── Mock Data Adapters ✅ Active
-└── REST API ✅ Accessible at http://localhost:8080
+
+### Prometheus Integration
+Your API exposes Prometheus metrics at:
+```
+https://risk-engine-720i.onrender.com/actuator/prometheus
 ```
 
-**Accessible by:** Only your local machine
-**Can Tax Audit use it?** NO - Not yet deployed
+---
 
-### What's Needed for Integration:
+## Sample Test Data
 
-#### Option 1: Deploy to Server (Production)
+### Valid Taxpayer IDs
+```
+123e4567-e89b-12d3-a456-426614174000
+a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d
+f1e2d3c4-b5a6-4738-9291-0a1b2c3d4e5f
+```
 
-1. **Build the application**
-   ```bash
-   ./mvnw clean package
-   ```
+### Valid TINs
+```
+1234567890
+9876543210
+1111111111
+```
 
-2. **Deploy JAR to server**
-   ```bash
-   # Copy to server
-   scp target/risk-engine-1.0.0-SNAPSHOT.jar user@server:/opt/risk-engine/
-   ```
-
-3. **Run on server**
-   ```bash
-   java -jar risk-engine-1.0.0-SNAPSHOT.jar --spring.profiles.active=prod
-   ```
-
-4. **Server URL** becomes: `http://your-server:8080`
-
-5. **Tax Audit can integrate** using that server URL
-
-#### Option 2: Docker Deployment
-
-1. **Create Dockerfile** (we can create this)
-2. **Build Docker image**
-3. **Deploy to Docker registry**
-4. **Run containers on server**
-5. **Tax Audit connects to server**
-
-#### Option 3: Keep Local + Network Access
-
-If you want Tax Audit to use your local machine:
-
-1. **Configure firewall** to allow port 8080
-2. **Use your machine's IP** instead of localhost
-3. **Keep application running**
-4. **Tax Audit uses** `http://YOUR_IP:8080`
-
-⚠️ **Not recommended for production!**
+### Risk Levels
+```
+CRITICAL
+HIGH
+MEDIUM
+LOW
+```
 
 ---
 
 ## Next Steps
 
-### For Testing (Now):
-✅ Use Postman or curl to test all endpoints
-✅ Verify responses are complete
-✅ Test different taxpayer IDs
-✅ Verify database stores assessments
-
-### For Integration (Later):
-1. **Deploy to Server** - Move from localhost to production server
-2. **Replace Mock Adapters** - Connect to real taxpayer data
-3. **Configure Tax Audit** - Point Tax Audit to Risk Engine URL
-4. **Test Integration** - End-to-end testing
-5. **Go Live** - Production deployment
+1. ✅ **Wait for current redeploy** (table name fix)
+2. ✅ **Import Postman collection**
+3. ✅ **Test health endpoints** (work now)
+4. ✅ **Test risk assessment** (works after redeploy)
+5. ✅ **Explore all endpoints**
+6. 🚀 **Integrate with your frontend!**
 
 ---
 
-## Summary
+## API Documentation
 
-### ✅ What's Working:
-- Application running locally
-- Health check responds
-- Risk assessment API works
-- Returns complete risk scores
-- Database connected
-- All 6 categories calculated
-- All 11 indicators evaluated
+Once deployed, you may have Swagger UI available at:
+```
+https://risk-engine-720i.onrender.com/swagger-ui.html
+```
 
-### ⏳ What's Next:
-- Deploy to production server
-- Replace mock adapters with database adapters
-- Load real taxpayer data
-- Configure Tax Audit integration
-- End-to-end testing
-- Production launch
-
-### 🎯 Current Status:
-**READY FOR TESTING** ✅
-**NOT YET DEPLOYED FOR INTEGRATION** ⏳
+(If not available, we can enable it)
 
 ---
 
-## Questions?
+## Rate Limits (Render Free Tier)
 
-**Q: Can I test it now?**
-A: YES! Use Postman or curl with the examples above.
-
-**Q: Can Tax Audit use it now?**
-A: NO - It needs to be deployed to a server first.
-
-**Q: What's the difference between testing and integration?**
-A: 
-- **Testing** = You manually test the API (works now)
-- **Integration** = Tax Audit system calls the API automatically (needs deployment)
-
-**Q: How long to deploy?**
-A: Depends on your infrastructure. Could be:
-- Same day (if server ready)
-- Few days (if need to set up server)
-- Weeks (if procurement/approval needed)
+- **No hard rate limits** on free tier
+- Service sleeps after 15 minutes of inactivity
+- 750 hours/month free
+- After that, service stops until next month
 
 ---
 
-**Ready to test? Start with the Postman collection!** 🚀
+## Production Considerations
+
+When you're ready to upgrade:
+
+1. **Custom Domain**: Add your own domain
+2. **Scale Up**: Increase instance size for better performance
+3. **Add Redis**: Enable caching for faster responses
+4. **Add Kafka**: Enable event streaming
+5. **Monitoring**: Add Datadog/New Relic integration
+
+---
+
+## Support
+
+**Issues?** Check:
+1. Render Dashboard → Logs
+2. Health endpoint: `/actuator/health`
+3. Metrics endpoint: `/actuator/metrics`
+
+**Need Help?**
+- Check logs first
+- Verify request format
+- Test with curl before Postman
+- Check if redeploy is complete
+
+---
+
+🎉 **Congratulations on your successful deployment!**
+
+Your Risk Engine is now live and ready to assess taxpayer risk!

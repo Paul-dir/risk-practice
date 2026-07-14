@@ -1,0 +1,355 @@
+{
+	"info": {
+		"name": "Risk Engine - Production (Render)",
+		"description": "Test your deployed Risk Engine API on Render.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://risk-engine-720i.onrender.com",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Health & Monitoring",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "health"]
+						},
+						"description": "Check if the service is up and running"
+					}
+				},
+				{
+					"name": "Detailed Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/health/readiness",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "health", "readiness"]
+						},
+						"description": "Check readiness status with details"
+					}
+				},
+				{
+					"name": "All Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/metrics",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "metrics"]
+						},
+						"description": "List all available metrics"
+					}
+				},
+				{
+					"name": "Risk Assessments Completed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/metrics/risk.assessment.completed",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "metrics", "risk.assessment.completed"]
+						},
+						"description": "Total risk assessments completed"
+					}
+				},
+				{
+					"name": "Prometheus Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/prometheus",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "prometheus"]
+						},
+						"description": "Prometheus-formatted metrics"
+					}
+				}
+			]
+		},
+		{
+			"name": "Risk Assessment",
+			"item": [
+				{
+					"name": "Assess Taxpayer Risk",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"taxpayerId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"tin\": \"1234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/assess",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "assess"]
+						},
+						"description": "Create a new risk assessment for a taxpayer"
+					}
+				},
+				{
+					"name": "Get Risk Assessment by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/assessments/:assessmentId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "assessments", ":assessmentId"],
+							"variable": [
+								{
+									"key": "assessmentId",
+									"value": "123e4567-e89b-12d3-a456-426614174001",
+									"description": "Assessment UUID"
+								}
+							]
+						},
+						"description": "Retrieve a specific risk assessment"
+					}
+				},
+				{
+					"name": "Get Latest Assessment for Taxpayer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/taxpayers/:taxpayerId/latest",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "taxpayers", ":taxpayerId", "latest"],
+							"variable": [
+								{
+									"key": "taxpayerId",
+									"value": "123e4567-e89b-12d3-a456-426614174000",
+									"description": "Taxpayer UUID"
+								}
+							]
+						},
+						"description": "Get the most recent risk assessment for a taxpayer"
+					}
+				},
+				{
+					"name": "Get Assessment History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/taxpayers/:taxpayerId/history",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "taxpayers", ":taxpayerId", "history"],
+							"variable": [
+								{
+									"key": "taxpayerId",
+									"value": "123e4567-e89b-12d3-a456-426614174000",
+									"description": "Taxpayer UUID"
+								}
+							]
+						},
+						"description": "Get all risk assessments for a taxpayer"
+					}
+				},
+				{
+					"name": "Search Assessments by Risk Level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/assessments?riskLevel=HIGH&page=0&size=20",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "assessments"],
+							"query": [
+								{
+									"key": "riskLevel",
+									"value": "HIGH",
+									"description": "CRITICAL, HIGH, MEDIUM, LOW"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Search assessments by risk level"
+					}
+				}
+			]
+		},
+		{
+			"name": "Risk Profile",
+			"item": [
+				{
+					"name": "Get Taxpayer Risk Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/profiles/:taxpayerId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "profiles", ":taxpayerId"],
+							"variable": [
+								{
+									"key": "taxpayerId",
+									"value": "123e4567-e89b-12d3-a456-426614174000",
+									"description": "Taxpayer UUID"
+								}
+							]
+						},
+						"description": "Get complete risk profile for a taxpayer"
+					}
+				},
+				{
+					"name": "Update Risk Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"riskTolerance\": \"MODERATE\",\n  \"watchlistStatus\": false,\n  \"notes\": \"Updated profile\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/profiles/:taxpayerId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "profiles", ":taxpayerId"],
+							"variable": [
+								{
+									"key": "taxpayerId",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						},
+						"description": "Update taxpayer risk profile"
+					}
+				}
+			]
+		},
+		{
+			"name": "Configuration",
+			"item": [
+				{
+					"name": "Get All Risk Indicators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/config/indicators",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "config", "indicators"]
+						},
+						"description": "List all configured risk indicators"
+					}
+				},
+				{
+					"name": "Get Active Indicators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/config/indicators/active",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "config", "indicators", "active"]
+						},
+						"description": "List only active risk indicators"
+					}
+				},
+				{
+					"name": "Get Indicator by Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/config/indicators/:code",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "config", "indicators", ":code"],
+							"variable": [
+								{
+									"key": "code",
+									"value": "LATE_FILING",
+									"description": "Indicator code"
+								}
+							]
+						},
+						"description": "Get specific indicator configuration"
+					}
+				}
+			]
+		},
+		{
+			"name": "Statistics & Analytics",
+			"item": [
+				{
+					"name": "Get Risk Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/statistics",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "statistics"]
+						},
+						"description": "Get overall risk statistics"
+					}
+				},
+				{
+					"name": "Risk Distribution by Level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/statistics/distribution",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "statistics", "distribution"]
+						},
+						"description": "Get distribution of risk levels"
+					}
+				},
+				{
+					"name": "Top High-Risk Taxpayers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/risk/statistics/top-risks?limit=10",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "risk", "statistics", "top-risks"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get list of highest risk taxpayers"
+					}
+				}
+			]
+		}
+	]
+}
