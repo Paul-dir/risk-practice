@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -23,9 +25,13 @@ import java.time.Duration;
  * 
  * Configures Spring Cache abstraction with Redis backend.
  * Includes custom ObjectMapper for proper Java 8 time serialization.
+ * 
+ * Only enabled when RedisConnectionFactory is available (i.e., Redis auto-config is not excluded).
  */
 @Configuration
 @EnableCaching
+@ConditionalOnClass(RedisConnectionFactory.class)
+@ConditionalOnProperty(name = "spring.cache.type", havingValue = "redis", matchIfMissing = false)
 @Slf4j
 public class CacheConfiguration {
     

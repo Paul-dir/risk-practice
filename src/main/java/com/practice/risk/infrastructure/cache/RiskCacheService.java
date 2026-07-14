@@ -5,6 +5,7 @@ import com.practice.risk.domain.model.RiskAssessment;
 import com.practice.risk.domain.model.TaxpayerRiskProfile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,13 @@ import java.util.UUID;
  * - Automatic TTL expiration
  * - Manual invalidation on updates
  * - Batch invalidation for configuration changes
+ * 
+ * Only enabled when RedisTemplate bean is available (i.e., Redis is configured).
  */
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@ConditionalOnBean(RedisTemplate.class)
 public class RiskCacheService {
     
     private final RedisTemplate<String, String> redisTemplate;
