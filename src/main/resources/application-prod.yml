@@ -29,10 +29,12 @@ spring:
   cache:
     type: simple  # Use in-memory cache instead of Redis
 
-  # Disable Kafka auto-configuration
+  # Disable Kafka and Redis auto-configuration
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
 
 # Risk Engine Configuration
 risk-engine:
@@ -48,3 +50,9 @@ logging:
     com.practice.risk: INFO
     org.springframework.web: WARN
     org.hibernate.SQL: WARN
+
+# Management/Actuator Configuration
+management:
+  health:
+    redis:
+      enabled: false  # Disable Redis health check in production
