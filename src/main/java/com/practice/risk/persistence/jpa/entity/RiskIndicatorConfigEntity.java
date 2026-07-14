@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "risk_indicator_configs")
+@Table(name = "risk_indicator_config")  // Fixed: singular to match database table
 @Data
 @Builder
 @NoArgsConstructor
