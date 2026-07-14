@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "Tax Risk Engine - Test Taxpayers",
+    "description": "Collection for testing 4 realistic taxpayer scenarios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Perfect Taxpayer (LOW RISK - 2.97)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"73f6813e-4bea-4eb6-8fc8-df9ea8888f2e\",\n  \"taxYear\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "score"]
+        },
+        "description": "Meridian Office Supplies PLC - Fully compliant with minimal issues"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Late Filing Only (LOW RISK - 7.84)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"965c6a52-5863-491b-927f-e4949eff49b7\",\n  \"taxYear\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "score"]
+        },
+        "description": "Coastal Fisheries Cooperative - Occasional filing delays but pays on time"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Late Payment Only (LOW RISK - 10.56)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"efb9ba6b-c0e6-452f-8712-0310fea39f09\",\n  \"taxYear\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "score"]
+        },
+        "description": "Harborview Auto Repair Ltd - On-time filer but late payments due to cash flow"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Multiple Amendments (MEDIUM RISK - 40.83)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerId\": \"8646ee0e-54e5-4ce8-a2fb-c60b6fe42a71\",\n  \"taxYear\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "score"]
+        },
+        "description": "Zenith Business Consulting Ltd - Multiple amendments, high VAT ratio, related party transactions"
+      },
+      "response": []
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/actuator/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["actuator", "health"]
+        },
+        "description": "Check if the application is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Batch Score All Test Taxpayers",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"taxpayerIds\": [\n    \"73f6813e-4bea-4eb6-8fc8-df9ea8888f2e\",\n    \"965c6a52-5863-491b-927f-e4949eff49b7\",\n    \"efb9ba6b-c0e6-452f-8712-0310fea39f09\",\n    \"8646ee0e-54e5-4ce8-a2fb-c60b6fe42a71\"\n  ],\n  \"taxYear\": 2025\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/risk/score/batch",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "risk", "score", "batch"]
+        },
+        "description": "Score all 4 test taxpayers at once (if batch endpoint exists)"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

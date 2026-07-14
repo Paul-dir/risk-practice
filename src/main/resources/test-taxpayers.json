@@ -1,0 +1,313 @@
+{
+  "taxpayers": [
+    {
+      "scenario_key": "perfect_taxpayer",
+      "taxpayer_id": "73f6813e-4bea-4eb6-8fc8-df9ea8888f2e",
+      "tin": "TIN-523938499",
+      "business_name": "Meridian Office Supplies PLC",
+      "business_type": "Company",
+      "industry_sector": "Wholesale Trade",
+      "legal_entity": "Private Limited Company",
+      "registration_date": "2012-11-28",
+      "tax_office": "Large Taxpayer Office",
+      "region": "Eastern Region",
+      "city": "Eastport",
+      "ownership_type": "Foreign",
+      "annual_revenue": 7590743.08,
+      "employee_count": 300,
+      "vat_registered": true,
+      "importer_exporter": false,
+      "tax_types_registered": ["VAT", "CIT", "PAYE", "WHT"],
+      "filing_summary": {
+        "total_periods_reviewed": 15,
+        "missing_count": 0,
+        "late_count": 4,
+        "amendment_count": 0,
+        "total_late_days": 14
+      },
+      "payment_summary": {
+        "total_outstanding": 0.0,
+        "late_payment_count": 1,
+        "total_late_days": 3,
+        "outstanding_pct_of_revenue": 0.0
+      },
+      "financial_data": {
+        "revenue_2023": 7590743.08,
+        "revenue_2024": 7793446.72,
+        "revenue_2025": 8309345.23,
+        "profit_2023": 609336.12,
+        "profit_2024": 811384.54,
+        "profit_2025": 1044856.74,
+        "profit_margin_2025": 12.57,
+        "revenue_growth_pct": 9.47
+      },
+      "vat_information": {
+        "output_vat": 1138611.46,
+        "input_vat": 927968.34,
+        "vat_ratio": 0.82
+      },
+      "customs_data": {
+        "is_importer_exporter": true,
+        "declared_import_value": 1993548.93,
+        "matching_domestic_sales": 1973613.44,
+        "variance_pct": 1
+      },
+      "behavioral_data": {
+        "business_age_years": 10.4,
+        "address_changes_last_12m": 0,
+        "director_changes_last_12m": 0
+      },
+      "previous_audit": {
+        "has_previous_audit": true,
+        "audit_year": 2024,
+        "finding": "Fictitious invoicing / fraudulent input VAT claims identified",
+        "adjustment": 237816.54,
+        "resolved": true
+      },
+      "industry_benchmark": {
+        "average_profit_margin_pct": 12.83,
+        "average_vat_ratio": 0.84,
+        "average_growth_pct": 3.15,
+        "sector_risk_classification": "Standard"
+      },
+      "expected_result": {
+        "overall_score": 2.97,
+        "risk_level": "LOW",
+        "recommended_audit_type": "Monitor; eligible for random selection (QA)"
+      }
+    },
+    {
+      "scenario_key": "late_filing_only",
+      "taxpayer_id": "965c6a52-5863-491b-927f-e4949eff49b7",
+      "tin": "TIN-434848879",
+      "business_name": "Coastal Fisheries Cooperative",
+      "business_type": "Company",
+      "industry_sector": "Fishing",
+      "legal_entity": "Public Limited Company",
+      "registration_date": "2024-04-30",
+      "tax_office": "Small Business Tax Office",
+      "region": "Southern Region",
+      "city": "Southbridge",
+      "ownership_type": "Joint Venture",
+      "annual_revenue": 3921101.57,
+      "employee_count": 137,
+      "vat_registered": true,
+      "importer_exporter": false,
+      "tax_types_registered": ["VAT", "CIT", "PAYE", "WHT"],
+      "filing_summary": {
+        "total_periods_reviewed": 15,
+        "missing_count": 0,
+        "late_count": 5,
+        "amendment_count": 0,
+        "total_late_days": 177
+      },
+      "payment_summary": {
+        "total_outstanding": 0.0,
+        "late_payment_count": 2,
+        "total_late_days": 11,
+        "outstanding_pct_of_revenue": 0.0
+      },
+      "financial_data": {
+        "revenue_2023": 3921101.57,
+        "revenue_2024": 4043488.24,
+        "revenue_2025": 4171394.19,
+        "profit_2023": 119483.41,
+        "profit_2024": 279477.25,
+        "profit_2025": 249529.96,
+        "profit_margin_2025": 5.98,
+        "revenue_growth_pct": 6.38
+      },
+      "vat_information": {
+        "output_vat": 588165.24,
+        "input_vat": 474943.43,
+        "vat_ratio": 0.81
+      },
+      "customs_data": {
+        "is_importer_exporter": false,
+        "declared_import_value": 0,
+        "matching_domestic_sales": 0,
+        "variance_pct": 0
+      },
+      "behavioral_data": {
+        "business_age_years": 6.3,
+        "address_changes_last_12m": 0,
+        "director_changes_last_12m": 0
+      },
+      "previous_audit": {
+        "has_previous_audit": true,
+        "audit_year": 2024,
+        "finding": "Fictitious invoicing / fraudulent input VAT claims identified",
+        "adjustment": 390676.09,
+        "resolved": true
+      },
+      "industry_benchmark": {
+        "average_profit_margin_pct": 16.61,
+        "average_vat_ratio": 0.7,
+        "average_growth_pct": 6.48,
+        "sector_risk_classification": "Standard"
+      },
+      "expected_result": {
+        "overall_score": 7.84,
+        "risk_level": "LOW",
+        "recommended_audit_type": "Monitor; eligible for random selection (QA)"
+      }
+    },
+    {
+      "scenario_key": "late_payment_only",
+      "taxpayer_id": "efb9ba6b-c0e6-452f-8712-0310fea39f09",
+      "tin": "TIN-439280725",
+      "business_name": "Harborview Auto Repair Ltd",
+      "business_type": "Company",
+      "industry_sector": "Vehicle Repair Services",
+      "legal_entity": "Public Limited Company",
+      "registration_date": "2019-02-24",
+      "tax_office": "Medium Taxpayer Office",
+      "region": "Northern Region",
+      "city": "Northfield",
+      "ownership_type": "Joint Venture",
+      "annual_revenue": 3230060.37,
+      "employee_count": 157,
+      "vat_registered": true,
+      "importer_exporter": false,
+      "tax_types_registered": ["VAT", "CIT", "PAYE", "WHT"],
+      "filing_summary": {
+        "total_periods_reviewed": 15,
+        "missing_count": 0,
+        "late_count": 1,
+        "amendment_count": 0,
+        "total_late_days": 6
+      },
+      "payment_summary": {
+        "total_outstanding": 0.0,
+        "late_payment_count": 4,
+        "total_late_days": 111,
+        "outstanding_pct_of_revenue": 0.0
+      },
+      "financial_data": {
+        "revenue_2023": 3230060.37,
+        "revenue_2024": 3233331.33,
+        "revenue_2025": 3229958.11,
+        "profit_2023": 160177.34,
+        "profit_2024": 190978.5,
+        "profit_2025": 469682.37,
+        "profit_margin_2025": 14.54,
+        "revenue_growth_pct": -0.01
+      },
+      "vat_information": {
+        "output_vat": 484509.06,
+        "input_vat": 394874.88,
+        "vat_ratio": 0.81
+      },
+      "customs_data": {
+        "is_importer_exporter": false,
+        "declared_import_value": 0,
+        "matching_domestic_sales": 0,
+        "variance_pct": 0
+      },
+      "behavioral_data": {
+        "business_age_years": 6.0,
+        "address_changes_last_12m": 0,
+        "director_changes_last_12m": 0
+      },
+      "previous_audit": {
+        "has_previous_audit": true,
+        "audit_year": 2024,
+        "finding": "Fictitious invoicing / fraudulent input VAT claims identified",
+        "adjustment": 79361.7,
+        "resolved": true
+      },
+      "industry_benchmark": {
+        "average_profit_margin_pct": 5.54,
+        "average_vat_ratio": 0.61,
+        "average_growth_pct": 5.04,
+        "sector_risk_classification": "Standard"
+      },
+      "expected_result": {
+        "overall_score": 10.56,
+        "risk_level": "LOW",
+        "recommended_audit_type": "Monitor; eligible for random selection (QA)"
+      }
+    },
+    {
+      "scenario_key": "multiple_amendments",
+      "taxpayer_id": "8646ee0e-54e5-4ce8-a2fb-c60b6fe42a71",
+      "tin": "TIN-668212944",
+      "business_name": "Zenith Business Consulting Ltd",
+      "business_type": "Company",
+      "industry_sector": "Professional Services",
+      "legal_entity": "Sole Proprietorship",
+      "registration_date": "2013-10-24",
+      "tax_office": "Regional Tax Office",
+      "region": "Northern Region",
+      "city": "Northfield",
+      "ownership_type": "Local",
+      "annual_revenue": 4746828.78,
+      "employee_count": 147,
+      "vat_registered": true,
+      "importer_exporter": true,
+      "tax_types_registered": ["VAT", "CIT", "PAYE", "WHT"],
+      "filing_summary": {
+        "total_periods_reviewed": 15,
+        "missing_count": 0,
+        "late_count": 7,
+        "amendment_count": 5,
+        "total_late_days": 91
+      },
+      "payment_summary": {
+        "total_outstanding": 0.0,
+        "late_payment_count": 1,
+        "total_late_days": 27,
+        "outstanding_pct_of_revenue": 0.0
+      },
+      "financial_data": {
+        "revenue_2023": 4746828.78,
+        "revenue_2024": 4950076.59,
+        "revenue_2025": 5222579.3,
+        "profit_2023": 669539.53,
+        "profit_2024": 525676.45,
+        "profit_2025": 648733.77,
+        "profit_margin_2025": 12.42,
+        "revenue_growth_pct": 10.02
+      },
+      "vat_information": {
+        "output_vat": 712024.32,
+        "input_vat": 703124.02,
+        "vat_ratio": 0.99
+      },
+      "customs_data": {
+        "is_importer_exporter": true,
+        "declared_import_value": 1738506.55,
+        "matching_domestic_sales": 1425575.37,
+        "variance_pct": 18
+      },
+      "behavioral_data": {
+        "business_age_years": 4.5,
+        "address_changes_last_12m": 0,
+        "director_changes_last_12m": 0
+      },
+      "previous_audit": {
+        "has_previous_audit": true,
+        "audit_year": 2024,
+        "finding": "Fictitious invoicing / fraudulent input VAT claims identified",
+        "adjustment": 275571.75,
+        "resolved": true
+      },
+      "industry_benchmark": {
+        "average_profit_margin_pct": 13.53,
+        "average_vat_ratio": 0.75,
+        "average_growth_pct": 7.57,
+        "sector_risk_classification": "Elevated"
+      },
+      "related_parties": {
+        "has_related_parties": true,
+        "subsidiaries_count": 2,
+        "related_party_txn_pct_of_revenue": 37.7
+      },
+      "expected_result": {
+        "overall_score": 40.83,
+        "risk_level": "MEDIUM",
+        "recommended_audit_type": "Desk Audit or Issue Audit within 60 days"
+      }
+    }
+  ]
+}
