@@ -38,6 +38,8 @@ spring:
 risk-engine:
   events:
     kafka-enabled: false  # Disable Kafka events in production
+  batch:
+    enabled: false  # Disable batch scheduler in production for now
 
 # Logging Configuration
 logging:
